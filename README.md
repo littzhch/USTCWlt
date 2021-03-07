@@ -24,6 +24,7 @@ wa.login()
 wa.set_connection(port=8, time=14)
 ```
 port: 整数1-9，对应9个网络出口
+ 
 time: 开通时间（小时），0为永久
 
 现在已经连上校园网了，如果想要断开连接:
