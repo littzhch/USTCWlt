@@ -2,13 +2,10 @@
 这是一个提供登录南七技校网络通和设置网络功能的Python库
 
 ## 食用方法
-<br/></br>
-<br/></br>
 - step 1: 导入
 ```Python
 import ustcwlt
 ```
-<br/></br>
 <br/></br>
 <br/></br>
 <br/></br>
@@ -20,12 +17,10 @@ user_agent为用户代理字符串，默认为win10新版Edge，可不指定
 <br/></br>
 <br/></br>
 <br/></br>
-<br/></br>
 - step 3: 调用login()方法
 ```Python
 wa.login()
 ```
-<br/></br>
 <br/></br>
 <br/></br>
 <br/></br>
