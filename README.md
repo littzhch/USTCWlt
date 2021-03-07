@@ -9,7 +9,7 @@ import ustcwlt
 <br/></br>
 <br/></br>
 <br/></br>
-- step 2: 创建WltAccount对象的实例
+- step 2: 创建WltAccount类的实例
 ```Python
 wa = ustcwlt.WltAccount(user_name="name", password="123456", user_agent="...")
 ```
