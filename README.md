@@ -11,7 +11,7 @@ import ustcwlt
 <br/></br>
 - step 2: 创建WltAccount对象的实例
 ```Python
-wa = WltAccount(user_name="name", password="123456", user_agent="...")
+wa = ustcwlt.WltAccount(user_name="name", password="123456", user_agent="...")
 ```
 user_agent为用户代理字符串，默认为win10新版Edge，可不指定
 <br/></br>
