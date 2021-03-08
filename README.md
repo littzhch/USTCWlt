@@ -6,7 +6,7 @@
 ```Python
 import ustcwlt
 ```
-<br/></br>
+
 <br/></br>
 <br/></br>
 - step 2: 创建WltAccount类的实例
@@ -14,14 +14,14 @@ import ustcwlt
 wa = ustcwlt.WltAccount(user_name="name", password="123456", user_agent="...")
 ```
 user_agent为用户代理字符串，默认为win10新版Edge，可不指定
+
 <br/></br>
 <br/></br>
-<br/></br>
-- step 3: 调用login()方法
+- step 3: 调用login()方法登录账号
 ```Python
 wa.login()
 ```
-<br/></br>
+
 <br/></br>
 <br/></br>
 - step 4: 调用set_connection方法设置网络
@@ -34,9 +34,7 @@ time: 开通时间（小时），0为永久
   
 <br/></br>
 <br/></br>
-<br/></br>
-<br/></br>
-现在已经连上校园网了，如果想要断开连接:
+现在已经连上校园网了，如果想要断开连接，可退出登陆:
 ```Python
 wa.logout()
 ```
