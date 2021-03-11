@@ -15,6 +15,18 @@ _defaultAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "\
                 "Chrome/89.0.4389.72 Safari/537.36 Edg/89.0.774.45"
 
 
+class NetworkError(Exception):
+    def __init__(self, err="网络连接出错"):
+        Exception.__init__(self, err)
+
+class IpError(Exception):
+    def __init__(self, err="非科大IP地址"):
+        Exception.__init__(self, err)
+
+class LoginError(Exception):
+    def __init__(self, err="用户名或密码错误"):
+        Exception.__init__(self, err)
+
 def _get_ip():
     req = urllib.request.Request(_wlt_url)
     response = urllib.request.urlopen(req)
@@ -22,6 +34,33 @@ def _get_ip():
     result = re.search("([1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*)", html).group(1)
     return result
 
+def _analyse_html(html):
+    if re.search("公用计算机", html):
+        if re.search("非科大", html):
+            return {
+                "type": "loginwrongip"
+                }
+        else:
+            ip = re.search("([1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*)", html).group(1)
+            return {
+                "type": "login",
+                "ip": ip
+                }
+    elif re.search("安全原因", html):
+        return {
+            "type": "loginfailed"
+            }
+    else:
+        currentport = \
+        re.search("出口: ([1-9])", html).group(1)
+        ip = \
+        re.search("当前IP地址([1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*)", html).group(1)
+        return {
+            "type": "info",
+            "port": currentport,
+            "ip": ip
+            }
+        
 
 def _get_connection_url(port, time):
     url = _wlt_url + "?cmd=set&url=URL&type=" + str(port - 1) + \
@@ -32,10 +71,22 @@ def _get_connection_url(port, time):
 
 class WltAccount:
     def __init__(self, user_name, password, user_agent=_defaultAgent):
+        try:
+            req = urllib.request.Request(_wlt_url)
+            response = urllib.request.urlopen(req)
+            html = response.read().decode("GBK")
+        except urllib.error.URLError:
+            raise NetworkError
+
+        dict = _analyse_html(html)
+        if dict["type"] == "loginwrongip":
+            raise IpError
+
+
         login_data = {
             "cmd":          "login",
             "url":          "URL",
-            "ip":           _get_ip(),
+            "ip":           dict["ip"],
             "name":         user_name,
             "password":     password
         }
