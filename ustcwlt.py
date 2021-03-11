@@ -106,9 +106,13 @@ class WltAccount:
         self.opener = urllib.request.build_opener(handler)
 
     def login(self):
-        req = urllib.request.Request(_wlt_url, self.login_data, self.header)
-        response = self.opener.open(req)
-        html = response.read().decode("GBK")
+        try:
+            req = urllib.request.Request(_wlt_url, self.login_data, self.header)
+            response = self.opener.open(req)
+            html = response.read().decode("GBK")
+        except urllib.error.URLError:
+            raise NetworkError
+
         dict =  _analyse_html(html)
         if dict["type"] == "loginfailed":
             raise LoginError(dict["msg"])
@@ -121,10 +125,16 @@ class WltAccount:
         if time < 0:
             raise ValueError("time超出范围")
         connection_url = _get_connection_url(port, time)
-        req = urllib.request.Request(connection_url, headers=self.header, method="GET")
-        self.opener.open(req)
+        try:
+            req = urllib.request.Request(connection_url, headers=self.header, method="GET")
+            self.opener.open(req)
+        except urllib.error.URLError:
+            raise NetworkError
 
     def logout(self):
         logout_url = _wlt_url + "?cmd=logout"
-        req = urllib.request.Request(logout_url, headers=self.header, method="GET")
-        self.opener.open(req)
+        try:
+            req = urllib.request.Request(logout_url, headers=self.header, method="GET")
+            self.opener.open(req)
+        except urllib.error.URLError:
+            raise NetworkError
