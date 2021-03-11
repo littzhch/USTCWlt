@@ -43,6 +43,8 @@ wa.logout()
 使用非科大网址登录，在创建实例时可能触发
 - LoginError:
 用户名不存在或密码错误，在调用login()方法时可能触发
+ 
+另外，调用set_connection()方法时参数范围错误会触发ValueError
 
 ## 最后
 模块仍在持续更新中
