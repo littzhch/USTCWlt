@@ -22,7 +22,6 @@ def analyse_html(html):
     pref                    [prefport] int 1-9             [preftime] int sec
      
     """
-    print(html)
     if re.search("公用计算机", html):
         ip = re.search("([1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*)", html).group(1)
         return {"type": "login", "ip": ip}
@@ -42,5 +41,10 @@ def analyse_html(html):
         if re.search("常用时间：永久", html):
             preftime = 0
         else:
-            preftime = 3600 * int(re.search("常用时间：([1-9]*)", html).group(1))
+            rst = re.search("常用时间：([1-9]*)([小分秒])", html)
+            preftime = int(rst.group(1))
+            if rst.group(2) == "小":
+                preftime *= 3600
+            elif rst.group(2) == "分":
+                preftime *= 60
         return {"type": "pref", "port": prefport, "time": preftime}

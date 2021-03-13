@@ -11,6 +11,7 @@ def generate_url(type, data=None):
     type: "base"       data:  None
           "showc"             None
           "setc"              (port, time) int(1-9) int(sec)
+          "fastsetc"          None
           "showp"             None
           "setp"              (port, time)
           "logout"            None
@@ -26,6 +27,10 @@ def generate_url(type, data=None):
     if type == "setc":
         url += "?cmd=set&url=URL&type=" + str(data[0] - 1) + \
                       "&exp=" + str(data[1])
+        return url
+
+    if type == "fastsetc":
+        url += "?cmd=set"
         return url
 
     if type == "showp":
