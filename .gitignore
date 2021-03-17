@@ -7,3 +7,5 @@
 /.vs/slnx.sqlite
 /.vs/ProjectSettings.json
 /.vs/
+/ustcwlt/__pycache__/account.cpython-39.pyc
+*.pyc

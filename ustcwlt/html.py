@@ -14,12 +14,12 @@ def analyse_html(html):
     """
     return：
 
-    "type"         "ip"         "port"          "msg"         "time"
+    "type"         "ip"         "port"          "msg"         "time"      "access"
 
     login          [ip]
     failed                                      [msg]
-    info           [ip]      [currentport]
-    pref                    [prefport] int 1-9             [preftime] int sec
+    info           [ip]      [currentport]                                 0 or 1
+    pref                    [prefport] int 1-9           [preftime] int sec
      
     """
     if re.search("公用计算机", html):
@@ -34,7 +34,12 @@ def analyse_html(html):
         currentport = int(re.search("出口: ([1-9])", html).group(1))
         ip = \
         re.search("当前IP地址([1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*)", html).group(1)
-        return {"type": "info", "port": currentport, "ip": ip}
+
+        access = 1
+        if re.search("您没有使用网络通对外连接的权限", html):
+            access = 0
+
+        return {"type": "info", "port": currentport, "ip": ip, "access": access}
 
     if re.search("返回主界面", html):
         prefport = int(re.search("常用出口：([1-9])", html).group(1))

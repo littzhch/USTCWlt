@@ -26,6 +26,7 @@ class WltAccount:
             raise NetworkError
 
         self.is_login = False
+        self.access = True
         self.user_name = user_name
         self.password = password
         self.ip = analyse_html(html)["ip"]
@@ -34,15 +35,18 @@ class WltAccount:
         handler = urllib.request.HTTPCookieProcessor(cookie)
         self.opener = urllib.request.build_opener(handler)
 
-    def login(self):
+    def login(self, connect=False):
         login_data = {
             "cmd":          "login",
             "url":          "URL",
             "ip":           self.ip,
             "name":         self.user_name,
             "password":     self.password,
-            "go": " "
         }
+        if connect:
+            login_data["set"] = " "
+        else:
+            login_data["go"] = " "
 
         login_data = urllib.parse.urlencode(login_data).encode("GBK")
 
@@ -59,30 +63,9 @@ class WltAccount:
 
         self.is_login = True
 
-    def fastconnect(self):
-        login_data = {
-            "cmd":          "login",
-            "url":          "URL",
-            "ip":           self.ip,
-            "name":         self.user_name,
-            "password":     self.password,
-            "set": " "
-        }
-
-        login_data = urllib.parse.urlencode(login_data).encode("GBK")
-
-        try:
-            req = urllib.request.Request(generate_url("base"), login_data)
-            response = self.opener.open(req)
-            html = response.read().decode("GBK")
-        except urllib.error.URLError:
-            raise NetworkError
-
-        info = analyse_html(html)
-        if info["type"] == "failed":
-            raise LoginError(info["msg"])
-
-        self.is_login = True
+        self.access = info["access"]
+        if connect and (not self.access):
+            raise PermissionError("您没有使用网络通对外连接的权限")
 
 
     def get_info(self):
@@ -106,10 +89,13 @@ class WltAccount:
             "ip":              infoc["ip"],
             "currentport":     infoc["port"],
             "prefport":        infop["port"],
-            "preftime":        infop["time"]
+            "preftime":        infop["time"],
+            "access":          self.access
             }
 
     def set_connection(self, port=None, time=None):
+        if self.access == 0:
+            raise PermissionError("您没有使用网络通对外连接的权限")
         if not self.is_login:
             raise PermissionError("未登录无法进行操作")
         if not ((port == None) and (time == None)):
