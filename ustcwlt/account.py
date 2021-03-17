@@ -18,6 +18,10 @@ from ustcwlt.url import *
 
 class WltAccount:
     def __init__(self, user_name, password):
+        """
+        param user_name: str 网络通账号的用户名
+        param password:  str 账号密码
+        """
         try:
             req = urllib.request.Request(generate_url("base"))
             response = urllib.request.urlopen(req)
@@ -36,6 +40,12 @@ class WltAccount:
         self.opener = urllib.request.build_opener(handler)
 
     def login(self, connect=False):
+        """
+        登录账号
+        param connect: bool 默认为False
+                            若为False，仅登录账号
+                            若为True，登录账号并根据常用设置开通网络
+        """
         login_data = {
             "cmd":          "login",
             "url":          "URL",
@@ -69,6 +79,15 @@ class WltAccount:
 
 
     def get_info(self):
+        """
+        获取账号信息
+        return: dict
+        "ip":           str 当前网络的IP地址
+        "currentport":  int 当前账号的网络出口
+        "prefport":     int 常用设置的网络出口
+        "preftime":     int 常用设置的连接时间（秒）
+        "access":       int 若为0, 则当前账号未开通网络通服务；若为1，则已开通
+        """
         if not self.is_login:
             raise PermissionError("未登录无法进行操作")
 
@@ -94,6 +113,12 @@ class WltAccount:
             }
 
     def set_connection(self, port=None, time=None):
+        """
+        开通网络
+        param port: int 网络出口
+        param time: int 开通时间（秒）
+        特别，当port和time都为None（默认情况）时，按照常用设置开通网络
+        """
         if self.access == 0:
             raise PermissionError("您没有使用网络通对外连接的权限")
         if not self.is_login:
@@ -123,6 +148,11 @@ class WltAccount:
 
 
     def set_preference(self, port, time):
+        """
+        更改常用设置
+        param port: int 网络出口
+        param time: int 开通时间（秒）
+        """
         if not self.is_login:
             raise PermissionError("未登录无法进行操作")
 
@@ -148,6 +178,9 @@ class WltAccount:
 
 
     def logout(self):
+        """
+        退出登录
+        """
         if not self.is_login:
             raise PermissionError("未登录无法进行操作")
 
