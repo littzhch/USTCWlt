@@ -1,6 +1,8 @@
 """
 ustcwlt
-v0.3
+v1.0
+html.py
+使用正则表达式解析html页面
 """
 
 

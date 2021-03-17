@@ -1,6 +1,8 @@
 """
 ustcwlt
-v0.3
+v1.0
+url.py
+生成不同请求的url
 """
 
 __all__ = ["generate_url"]

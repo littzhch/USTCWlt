@@ -1,6 +1,8 @@
 """
 ustcwlt
-v0.3
+v1.0
+account.py
+WltAccount类，提供所有功能
 """
 
 
