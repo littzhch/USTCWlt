@@ -2,7 +2,7 @@
 这是一个提供登录南七技校网络通和设置网络功能的Python库
 
 ## 食用方法
-参考[MAUNAL.md](USTCWlt/develop/MAUNAL.md)
+参考[MAUNAL.md](https://github.com/littzhch/USTCWlt/develop/MANUAL.md)
 - step 1: 导入
 ```Python
 import ustcwlt
