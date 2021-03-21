@@ -2,8 +2,9 @@
 
 import ustcwlt
 
-
-wa = ustcwlt.WltAccount("name", "123456")
+name = input("name:")
+password = input("password:")
+wa = ustcwlt.WltAccount(name, password)
 
 try:
     wa.login()
@@ -12,10 +13,7 @@ except ustcwlt.LoginError as err:
     exit()
     
 print(wa.get_info())
-
-wa.set_preference(8, 0)
-wa.set_connection()
+wa.set_connection(8, 0)
 print("connected")
-
 input("press any key to quit")
 wa.logout()
