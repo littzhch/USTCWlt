@@ -62,3 +62,7 @@
 无权进行操作
  
 在调用get_info(), set_connection(), set_preference()方法时，若还未登录或账户未开用网络通服务，会抛出此异常
+
+#### `exception TypeError & ValueError`
+在调用set_connection()和set_preference()方法时，若参数类型不符合
+要求，会抛出TypeError；若参数范围不符合要求，会抛出ValueError
