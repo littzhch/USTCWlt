@@ -33,8 +33,8 @@ class WltAccount:
 
         self.is_login = False
         self.access = True
-        self.user_name = user_name
-        self.password = password
+        self.user_name = str(user_name)
+        self.password = str(password)
         self.ip = analyse_html(html)["ip"]
 
         cookie = http.cookiejar.CookieJar()
