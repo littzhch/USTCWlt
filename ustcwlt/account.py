@@ -87,7 +87,7 @@ class WltAccount:
         "ip":           str 当前网络的IP地址
         "currentport":  int 当前账号的网络出口
         "prefport":     int 常用设置的网络出口
-        "preftime":     int 常用设置的连接时间（秒）
+        "preftime":     int 常用设置的连接时间（秒）；若为0，则代表永久
         "access":       int 若为0, 则当前账号未开通网络通服务；若为1，则已开通
         """
         if not self.is_login:
