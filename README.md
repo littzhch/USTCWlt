@@ -1,52 +1,16 @@
+![image](https://user-images.githubusercontent.com/49507721/111910368-0cd8d400-8a9c-11eb-9167-57f101761286.png) 
+![wlt32](https://user-images.githubusercontent.com/49507721/111910558-d3ed2f00-8a9c-11eb-9b8a-67f994e51358.png)
+![wlt48](https://user-images.githubusercontent.com/49507721/111910537-bfa93200-8a9c-11eb-9912-630a55d48400.png)  
 # USTCWlt
-这是一个提供登录南七技校网络通和设置网络功能的Python模块
 
-## 食用方法
-- step 1: 导入
-```Python
-import ustcwlt
-```
+这是一个提供登录中国数学物理大学（USTC）网络通和设置网络功能的Python库
 
-<br/></br>
-- step 2: 创建WltAccount类的实例
-```Python
-wa = ustcwlt.WltAccount(user_name="name", password="123456", user_agent="...")
-```
-user_agent为用户代理字符串，默认为win10新版Edge，可不指定
-
-<br/></br>
-- step 3: 调用login()方法登录账号
-```Python
-wa.login()
-```
-
-<br/></br>
-- step 4: 调用set_connection方法设置网络
-```Python
-wa.set_connection(port=8, time=14)
-```
-port: 整数1-9，对应9个网络出口
+## 使用方法
+将ustcwlt文件夹与自己的代码文件放在同一目录下即可正常导入使用
  
-time: 开通时间（小时），0为永久
-  
-<br/></br>
-现在已经连上校园网了，如果想要断开连接，可退出登陆:
-```Python
-wa.logout()
-```
+具体用法请参考[使用指南](https://github.com/littzhch/USTCWlt/main/develop/MANUAL.md)和[示例程序](https://github.com/littzhch/USTCWlt/blob/main/example.py)
 
-## 异常处理
-模块定义了3个异常类，分别为NetworkError，IpError，和LoginError
-- NetworkError:
-网络连接出现问题，在创建实例、调用3个方法时都有可能触发
-- IpError:
-使用非科大网址登录，在创建实例时可能触发
-- LoginError:
-用户名不存在或密码错误，在调用login()方法时可能触发
- 
-另外，调用set_connection()方法时参数范围错误会触发ValueError
-
-## 最后
-模块仍在持续更新中
- 
-如有bug或需求，欢迎提出
+## 注意
+- 网络通网站使用明文存储和传输密码，安全性较低
+- 请勿滥用
+- 代码只经过简单的测试，如发现bug，欢迎提出
