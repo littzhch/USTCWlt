@@ -17,6 +17,9 @@
 #### `WltAccount.get_info()`
 获取账号信息
  
+access为调用login()方法时获取的；
+其它信息都是调用本方法时获取的实时信息
+ 
     返回：dict
     {
      "ip":              str，当前网络的IP地址

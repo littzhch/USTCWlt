@@ -8,9 +8,9 @@
 ## 使用方法
 将ustcwlt文件夹与自己的代码文件放在同一目录下即可正常导入使用
  
-具体用法参考[使用指南](https://github.com/littzhch/USTCWlt/blob/develop/MANUAL.md)和[示例程序](https://github.com/littzhch/USTCWlt/blob/develop/example.py)
+具体用法请参考[使用指南](https://github.com/littzhch/USTCWlt/main/develop/MANUAL.md)和[示例程序](https://github.com/littzhch/USTCWlt/blob/main/example.py)
 
-## 最后
-模块仍在持续更新中
- 
-如有bug或需求，欢迎提出
+## 注意
+- 网络通网站使用明文存储和传输密码，安全性较低
+- 请勿滥用
+- 代码只经过简单的测试，如发现bug，欢迎提出
