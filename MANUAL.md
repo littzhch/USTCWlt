@@ -61,7 +61,7 @@ access为调用login()方法时获取的；
  
 在调用login()方法时，若使用非科大IP地址；输入的用户名不存在；或输入的密码错误，会抛出此异常
 
-#### `exception ustcwlt.PermissionError`
+#### `exception ustcwlt.AccessError`
 无权进行操作
  
 在调用get_info(), set_connection(), set_preference()方法时，若还未登录或账户未开用网络通服务，会抛出此异常

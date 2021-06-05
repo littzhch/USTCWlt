@@ -5,7 +5,7 @@ error.py
 自定义异常类
 """
 
-__all__ = ["NetworkError", "PermissionError", "LoginError"]
+__all__ = ["NetworkError", "AccessError", "LoginError"]
 
 
 class NetworkError(Exception):
@@ -16,7 +16,8 @@ class NetworkError(Exception):
     def __init__(self, err="网络连接出错"):
         Exception.__init__(self, err)
 
-class PermissionError(Exception):
+
+class AccessError(Exception):
     """
     无权进行操作
     在调用get_info(), set_connection(), set_preference()方法时，
@@ -24,6 +25,7 @@ class PermissionError(Exception):
     """
     def __init__(self, err="无权进行操作"):
         Exception.__init__(self, err)
+
 
 class LoginError(Exception):
     """

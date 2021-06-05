@@ -8,9 +8,9 @@ url.py
 __all__ = ["generate_url"]
 
 
-def generate_url(type, data=None):
+def generate_url(urltype, data=None):
     """
-    type: "base"       data:  None
+    urltype: "base"       data:  None
           "showc"             None
           "setc"              (port, time) int(1-9) int(sec)
           "fastsetc"          None
@@ -19,31 +19,31 @@ def generate_url(type, data=None):
           "logout"            None
     """
     url = "http://wlt.ustc.edu.cn/cgi-bin/ip"
-    if type == "base":
+    if urltype == "base":
         return url
 
-    if type == "showc":
+    if urltype == "showc":
         url += "?cmd=disp"
         return url
 
-    if type == "setc":
-        url += "?cmd=set&url=URL&type=" + str(data[0] - 1) + \
+    if urltype == "setc":
+        url += "?cmd=set&url=URL&urltype=" + str(data[0] - 1) + \
                       "&exp=" + str(data[1])
         return url
 
-    if type == "fastsetc":
+    if urltype == "fastsetc":
         url += "?cmd=set"
         return url
 
-    if type == "showp":
+    if urltype == "showp":
         url += "?cmd=pref"
         return url
 
-    if type == "setp":
-        url += "?cmd=pref&url=URL&type=" + str(data[0] - 1) + \
+    if urltype == "setp":
+        url += "?cmd=pref&url=URL&urltype=" + str(data[0] - 1) + \
                       "&exp=" + str(data[1])
         return url
 
-    if type == "logout":
+    if urltype == "logout":
         url += "?cmd=logout"
         return url

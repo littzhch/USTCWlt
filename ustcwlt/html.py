@@ -16,7 +16,7 @@ def analyse_html(html):
     """
     return：
 
-    "type"         "ip"         "port"          "msg"         "time"      "access"
+    "urltype"         "ip"         "port"          "msg"         "time"      "access"
 
     login          [ip]
     failed                                      [msg]
@@ -26,11 +26,11 @@ def analyse_html(html):
     """
     if re.search("公用计算机", html):
         ip = re.search("([1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*)", html).group(1)
-        return {"type": "login", "ip": ip}
+        return {"urltype": "login", "ip": ip}
 
     if re.search("请重新登录", html):
         msg = re.search("信息：<br>(.*)<p>", html).group(1)
-        return {"type": "failed", "msg": msg}
+        return {"urltype": "failed", "msg": msg}
 
     if re.search("校内测速", html):
         currentport = int(re.search("出口: ([1-9])", html).group(1))
@@ -41,7 +41,7 @@ def analyse_html(html):
         if re.search("您没有使用网络通对外连接的权限", html):
             access = 0
 
-        return {"type": "info", "port": currentport, "ip": ip, "access": access}
+        return {"urltype": "info", "port": currentport, "ip": ip, "access": access}
 
     if re.search("返回主界面", html):
         prefport = int(re.search("常用出口：([1-9])", html).group(1))
@@ -54,4 +54,4 @@ def analyse_html(html):
                 preftime *= 3600
             elif rst.group(2) == "分":
                 preftime *= 60
-        return {"type": "pref", "port": prefport, "time": preftime}
+        return {"urltype": "pref", "port": prefport, "time": preftime}

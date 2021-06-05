@@ -9,5 +9,5 @@ import ustcwlt.error
 
 WltAccount = ustcwlt.account.WltAccount
 NetworkError = ustcwlt.error.NetworkError
-PermissionError = ustcwlt.error.PermissionError
+AccessError = ustcwlt.error.AccessError
 LoginError = ustcwlt.error.LoginError

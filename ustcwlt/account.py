@@ -70,14 +70,14 @@ class WltAccount:
             raise NetworkError
 
         info = analyse_html(html)
-        if info["type"] == "failed":
+        if info["urltype"] == "failed":
             raise LoginError(info["msg"])
 
         self.is_login = True
 
         self.access = info["access"]
         if connect and (not self.access):
-            raise PermissionError("您没有使用网络通对外连接的权限")
+            raise AccessError("您没有使用网络通对外连接的权限")
 
     def get_info(self) -> dict:
         """
@@ -90,7 +90,7 @@ class WltAccount:
         "access":       int 若为0, 则当前账号未开通网络通服务；若为1，则已开通
         """
         if not self.is_login:
-            raise PermissionError("未登录无法进行操作")
+            raise AccessError("未登录无法进行操作")
 
         try:
             req = urllib.request.Request(generate_url("showc"))
@@ -121,9 +121,9 @@ class WltAccount:
         特别，当port和time都为None（默认情况）时，按照常用设置开通网络
         """
         if self.access == 0:
-            raise PermissionError("您没有使用网络通对外连接的权限")
+            raise AccessError("您没有使用网络通对外连接的权限")
         if not self.is_login:
-            raise PermissionError("未登录无法进行操作")
+            raise AccessError("未登录无法进行操作")
         if not ((port is None) and (time is None)):
             if type(port) != int:
                 raise TypeError("参数port应为int类型")
@@ -154,7 +154,7 @@ class WltAccount:
         param time: int 开通时间（秒）
         """
         if not self.is_login:
-            raise PermissionError("未登录无法进行操作")
+            raise AccessError("未登录无法进行操作")
 
         if type(port) != int:
             raise TypeError("参数port应为int类型")
@@ -181,7 +181,7 @@ class WltAccount:
         退出登录
         """
         if not self.is_login:
-            raise PermissionError("未登录无法进行操作")
+            raise AccessError("未登录无法进行操作")
 
         logout_url = generate_url("logout")
         try:
