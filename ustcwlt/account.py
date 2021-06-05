@@ -19,7 +19,7 @@ from ustcwlt.url import *
 
 
 class WltAccount:
-    def __init__(self, user_name, password):
+    def __init__(self, user_name: str, password: str):
         """
         param user_name: str 网络通账号的用户名
         param password:  str 账号密码
@@ -41,7 +41,7 @@ class WltAccount:
         handler = urllib.request.HTTPCookieProcessor(cookie)
         self.opener = urllib.request.build_opener(handler)
 
-    def login(self, connect=False):
+    def login(self, connect: bool = False):
         """
         登录账号
         param connect: bool 默认为False
@@ -79,8 +79,7 @@ class WltAccount:
         if connect and (not self.access):
             raise PermissionError("您没有使用网络通对外连接的权限")
 
-
-    def get_info(self):
+    def get_info(self) -> dict:
         """
         获取账号信息
         return: dict
@@ -114,7 +113,7 @@ class WltAccount:
             "access":          self.access
             }
 
-    def set_connection(self, port=None, time=None):
+    def set_connection(self, port: int = None, time: int = None):
         """
         开通网络
         param port: int 网络出口
@@ -125,7 +124,7 @@ class WltAccount:
             raise PermissionError("您没有使用网络通对外连接的权限")
         if not self.is_login:
             raise PermissionError("未登录无法进行操作")
-        if not ((port == None) and (time == None)):
+        if not ((port is None) and (time is None)):
             if type(port) != int:
                 raise TypeError("参数port应为int类型")
 
@@ -148,8 +147,7 @@ class WltAccount:
         except urllib.error.URLError:
             raise NetworkError
 
-
-    def set_preference(self, port, time):
+    def set_preference(self, port: int, time: int):
         """
         更改常用设置
         param port: int 网络出口
@@ -177,7 +175,6 @@ class WltAccount:
             self.opener.open(req)
         except urllib.error.URLError:
             raise NetworkError
-
 
     def logout(self):
         """
