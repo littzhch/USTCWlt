@@ -6,8 +6,19 @@
 
 这是一个提供登录中国数学物理大学（USTC）网络通和设置网络功能的Python库
 
-## 使用方法
-将ustcwlt文件夹与自己的代码文件放在同一目录下即可正常导入使用
+## 安装
+```
+pip3 install USTCWlt
+```
+或者
+```
+pip install USTCWlt
+```
+
+## 使用
+```
+import ustcwlt
+```
 
 具体用法请参考[使用指南](https://github.com/littzhch/USTCWlt/blob/main/MANUAL.md)和[示例程序](https://github.com/littzhch/USTCWlt/blob/main/example.py)
 
