@@ -20,7 +20,7 @@ pip install USTCWlt
 import ustcwlt
 ```
 
-具体用法请参考[使用指南](https://github.com/littzhch/USTCWlt/blob/main/MANUAL.md)和[示例程序](https://github.com/littzhch/USTCWlt/blob/main/example.py)
+具体用法请参考[使用指南](./MANUAL.md)和[示例程序](./example.py)
 
 ## 已知问题
 
