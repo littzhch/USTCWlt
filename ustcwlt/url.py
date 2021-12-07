@@ -18,7 +18,7 @@ def generate_url(urltype, data=None):
           "setp"              (port, time)
           "logout"            None
     """
-    url = "http://wlt.ustc.edu.cn/cgi-bin/ip"
+    url = "http://202.38.64.59/cgi-bin/ip"
     if urltype == "base":
         return url
 
